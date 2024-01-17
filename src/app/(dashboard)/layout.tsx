@@ -1,3 +1,4 @@
+import { UserButton } from '@clerk/nextjs'
 import { FC, ReactNode } from 'react'
 
 type Props = {
@@ -7,12 +8,16 @@ type Props = {
 const DashboardLayout: FC<Props> = ({ children }) => {
   return (
     <div className="h-screen w-screen relative">
-      <aside className="absolute w-[12.5rem] top-0 left-0 h-full border-r border-black/10">
+      <aside className="absolute w-[12.5rem] top-0 left-0 h-full border-r border-black/10 dark:border-white/40">
         Mood
       </aside>
-      <div className="ml-[12.5rem]">
-        <header className="h-[60px] border-b border-black/10">hello</header>
-        <main>{children}</main>
+      <div className="ml-[12.5rem] h-full">
+        <header className="h-[60px] border-b border-black/10 dark:border-white/40">
+          <div className="h-full w-full px-6 flex items-center justify-end">
+            <UserButton />
+          </div>
+        </header>
+        <main className=" h-[calc(100vh-60px)]">{children}</main>
       </div>
     </div>
   )
