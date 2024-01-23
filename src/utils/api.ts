@@ -13,4 +13,22 @@ export const createNewEntry = async () => {
     const { data } = await res.json()
     return data
   }
+
+  throw new Error('Failed to create new entry')
+}
+
+export const updateEntry = async (id: string, content: string) => {
+  const res = await fetch(
+    new Request(createURL(`/api/journal/${id}`), {
+      method: 'PATCH',
+      body: JSON.stringify({ content }),
+    })
+  )
+
+  if (res.ok) {
+    const { data } = await res.json()
+    return data
+  }
+
+  throw new Error('Failed to update entry')
 }

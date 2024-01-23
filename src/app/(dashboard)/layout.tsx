@@ -17,7 +17,7 @@ const DashboardLayout: FC<Props> = ({ children }) => {
             <UserButton />
           </div>
         </header>
-        <main className=" h-[calc(100vh-60px)]">{children}</main>
+        <main className=" h-[calc(100vh-180px)]">{children}</main>
       </div>
     </div>
   )
