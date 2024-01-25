@@ -17,28 +17,32 @@ const getEntry = async (id: string) => {
         userID: user.id,
       },
     },
+    include: {
+      analysis: true,
+    },
   })
   return entry
 }
 
 const EntryPage: React.FC<Props> = async ({ params }) => {
   const entry = await getEntry(params.id)
+  const { mood, summary, color, subject, negative } = entry?.analysis || {}
   const analysisData = [
     {
       name: 'Subject',
-      value: 'Maths',
+      value: subject,
     },
     {
       name: 'Summary',
-      value: 'This is a summary of the entry',
+      value: summary,
     },
     {
       name: 'Mood',
-      value: 'Happy',
+      value: mood,
     },
     {
       name: 'Negative',
-      value: true,
+      value: negative,
     },
   ]
   return (
@@ -47,7 +51,12 @@ const EntryPage: React.FC<Props> = async ({ params }) => {
         <Editor entry={entry} />
       </div>
       <div className="border-l border-white/50">
-        <div className="bg-blue-900 px-6 py-10">
+        <div
+          className=" px-6 py-10"
+          style={{
+            background: color,
+          }}
+        >
           <h2 className="text-2xl">Analysis</h2>
         </div>
         <div>
@@ -58,7 +67,7 @@ const EntryPage: React.FC<Props> = async ({ params }) => {
                 className="flex items-center justify-between px-2 py-4 border-b border-white/50 "
               >
                 <span className="text-lg font-semibold">{data.name}</span>
-                <span>{data.value.toString()}</span>
+                <span>{data?.value?.toString() || ''}</span>
               </li>
             ))}
           </ul>

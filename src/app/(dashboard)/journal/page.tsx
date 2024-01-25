@@ -3,6 +3,7 @@ import { prisma } from '@/utils/db'
 import NewEntryCard from './components/NewEntryCard'
 import EntryCard from './components/EntryCard'
 import Link from 'next/link'
+import { analyze } from '@/utils/ai'
 
 const getEntries = async () => {
   const user = await getUserByClerkId()
@@ -13,7 +14,11 @@ const getEntries = async () => {
     orderBy: {
       createdAt: 'desc',
     },
+    include: {
+      analysis: true,
+    },
   })
+
   return entries
 }
 
