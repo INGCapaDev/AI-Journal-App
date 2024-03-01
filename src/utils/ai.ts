@@ -13,6 +13,11 @@ type Entry = {
 }
 
 const schema = z.object({
+  sentimentScore: z
+    .number()
+    .describe(
+      'Sentiment of the text and rated from -10 to 10, where -10 is extremely negative and 10 is extremely positive.'
+    ),
   mood: z
     .string()
     .describe('The mood of the person who wrote the journal entry.'),
@@ -60,6 +65,7 @@ export const analyze = async (content: string) => {
       subject: 'unknown',
       color: 'unknown',
       negative: false,
+      sentimentScore: 0,
     }
   }
 }
