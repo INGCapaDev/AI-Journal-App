@@ -42,7 +42,7 @@ model Analysis {
   updatedAt DateTime @updatedAt
 
   entryID String       @unique
-  entry   JournalEntry @relation(fields: [entryID], references: [id])
+  entry   JournalEntry @relation(fields: [entryID], references: [id], onDelete: Cascade)
 
   mood     String
   summary  String  @db.Text
