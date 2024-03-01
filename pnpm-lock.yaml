@@ -8,6 +8,9 @@ dependencies:
   '@clerk/nextjs':
     specifier: ^4.29.3
     version: 4.29.3(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
+  '@langchain/core':
+    specifier: ^0.1.40
+    version: 0.1.40
   '@langchain/openai':
     specifier: ^0.0.12
     version: 0.0.12
@@ -532,7 +535,7 @@ packages:
       ws:
         optional: true
     dependencies:
-      '@langchain/core': 0.1.17
+      '@langchain/core': 0.1.40
       '@langchain/openai': 0.0.12
       flat: 5.0.2
       langsmith: 0.0.63
@@ -542,15 +545,15 @@ packages:
       - encoding
     dev: false
 
-  /@langchain/core@0.1.17:
-    resolution: {integrity: sha512-PNmQgyAsDFm3DsZD+Djmm+sxH8xTGMlAryhYNgTg1Wkvhh+ztCqcVVYAv+aWch8CM56FBYMD8Guq0TJuRJJxEA==}
+  /@langchain/core@0.1.40:
+    resolution: {integrity: sha512-TNX7swnPNFNXftsFMuXLkPhk+9/tE2veLFzuiiuIi0Mz/+jgPi4klHx9jxS8+DHPgMvKzmwsoE8U879iPByXjw==}
     engines: {node: '>=18'}
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.8
-      langsmith: 0.0.63
+      langsmith: 0.1.8
       ml-distance: 4.0.1
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -563,7 +566,7 @@ packages:
     resolution: {integrity: sha512-MR9x1xRXwJpdYlVx9Tga89q/MvxPrSTYyA5vy9tQ8dfQHNWnlgmI4gB/hDIsWUu1ooScagD4wW+aTnohTX+g+g==}
     engines: {node: '>=18'}
     dependencies:
-      '@langchain/core': 0.1.17
+      '@langchain/core': 0.1.40
       js-tiktoken: 1.0.8
       openai: 4.25.0
       zod: 3.22.4
@@ -2687,7 +2690,7 @@ packages:
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
       '@langchain/community': 0.0.20
-      '@langchain/core': 0.1.17
+      '@langchain/core': 0.1.40
       '@langchain/openai': 0.0.12
       binary-extensions: 2.2.0
       expr-eval: 2.0.2
@@ -2767,6 +2770,17 @@ packages:
 
   /langsmith@0.0.63:
     resolution: {integrity: sha512-8KtbiltWP8Ta7xErfXRvLudKgIoc/yRb9oSU8Ozh2215rlz9tnYicl37lS/ZdyeSbpSX8Rh8XhLTN5zVQ+5euA==}
+    hasBin: true
+    dependencies:
+      '@types/uuid': 9.0.7
+      commander: 10.0.1
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      uuid: 9.0.1
+    dev: false
+
+  /langsmith@0.1.8:
+    resolution: {integrity: sha512-GMEPhUPmkOPUih2ho07kSMhHYpCDkavc6Zg0XgBjhLsYqYaobOxFFNyOc806jOvH2yw2tmiKLuiAdlQAVbDnHg==}
     hasBin: true
     dependencies:
       '@types/uuid': 9.0.7

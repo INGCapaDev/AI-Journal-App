@@ -1,7 +1,16 @@
-import { OpenAI } from '@langchain/openai'
+import { OpenAI, OpenAIEmbeddings } from '@langchain/openai'
 import { StructuredOutputParser } from 'langchain/output_parsers'
 import z from 'zod'
 import { PromptTemplate } from 'langchain/prompts'
+import { Document } from 'langchain/document'
+import { loadQARefineChain } from 'langchain/chains'
+import { MemoryVectorStore } from 'langchain/vectorstores/memory'
+
+type Entry = {
+  id: string
+  content: string
+  createdAt: Date
+}
 
 const schema = z.object({
   mood: z
@@ -53,4 +62,30 @@ export const analyze = async (content: string) => {
       negative: false,
     }
   }
+}
+
+export const qa = async (question: string, entries: Entry[]) => {
+  const docs = entries.map(
+    (entry) =>
+      new Document({
+        pageContent: entry.content || 'No count this document has no content.',
+        metadata: {
+          id: entry.id,
+          createdAt: entry.createdAt,
+        },
+      })
+  )
+
+  const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
+  const chain = loadQARefineChain(model)
+
+  const store = await MemoryVectorStore.fromDocuments(
+    docs,
+    new OpenAIEmbeddings()
+  )
+
+  const relevantDocs = await store.similaritySearch(question)
+  const res = await chain.invoke({ input_documents: relevantDocs, question })
+
+  return res.output_text
 }
